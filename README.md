@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WeanWise - Professional Pediatric Nutrition</title>
+    <title>WeanDiet - Professional Pediatric Nutrition</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -81,9 +80,13 @@
         .recipe-card:active {
             transform: scale(0.98);
         }
-        .safe-bottom {
-            padding-bottom: env(safe-area-inset-bottom);
+        
+        /* Fixed Safe Bottom Navigation for Web & Mobile */
+        .nav-container {
+            padding-bottom: 12px; /* Default aesthetics for Web */
+            padding-bottom: calc(12px + env(safe-area-inset-bottom)); /* Add safe area for mobile */
         }
+        
         /* Chat specific enhancements */
         .category-chip {
             white-space: nowrap;
@@ -110,7 +113,7 @@
                     <i data-lucide="baby" class="w-6 h-6"></i>
                 </div>
                 <div class="cursor-pointer">
-                    <h1 class="text-lg font-bold text-gray-900 leading-none tracking-tight">WeanWise</h1>
+                    <h1 class="text-lg font-bold text-gray-900 leading-none tracking-tight">WeanDiet</h1>
                     <p id="header-subtitle" class="text-[10px] text-gray-500 font-semibold tracking-wide mt-0.5">PEDIATRIC NUTRITION</p>
                 </div>
             </div>
@@ -127,7 +130,7 @@
         </main>
 
         <!-- Bottom Navigation -->
-        <nav class="absolute bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-200 px-1 py-2 pb-6 safe-bottom z-30 flex justify-around items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+        <nav class="absolute bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-200 px-1 py-2 nav-container z-30 flex justify-around items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
             <button onclick="switchTab('home')" class="nav-btn flex flex-col items-center gap-1 w-14 p-1 rounded-xl transition-all" data-tab="home">
                 <i data-lucide="layout-grid" class="w-5 h-5"></i>
                 <span class="text-[9px] font-bold mt-0.5" data-key="nav_home">Home</span>
@@ -416,7 +419,6 @@
         // --- GOOGLE FORM EMBED LOGIC (QUIZ) ---
         function renderQuiz(container) {
             const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfD-T1u-h1lB8fT_vM5mJ-5y4q6r-9m-4z-3/viewform?embedded=true";
-            // Note: I'm using the short link provided by you, but standard iframes prefer full embedded links.
             // Using direct link: https://forms.gle/EJhej4Tfivpa7vM19 
             
             container.innerHTML = `
