@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WeanDiet - Professional Pediatric Nutrition</title>
+    <title>Wean Diet - Your Complete Weaning Food Guide</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -87,6 +87,16 @@
             padding-bottom: calc(12px + env(safe-area-inset-bottom)); /* Add safe area for mobile */
         }
         
+        /* Guide Content Styling */
+        .guide-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid #f3f4f6;
+            margin-bottom: 12px;
+        }
+        
         /* Chat specific enhancements */
         .category-chip {
             white-space: nowrap;
@@ -110,11 +120,11 @@
         <header class="bg-white/95 backdrop-blur-sm pt-8 pb-3 px-6 shadow-sm z-20 flex justify-between items-center sticky top-0 border-b border-gray-100">
             <div class="flex items-center gap-3" onclick="switchTab('home')">
                 <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 cursor-pointer">
-                    <i data-lucide="baby" class="w-6 h-6"></i>
+                    <i data-lucide="utensils-crossed" class="w-6 h-6"></i>
                 </div>
                 <div class="cursor-pointer">
-                    <h1 class="text-lg font-bold text-gray-900 leading-none tracking-tight">WeanDiet</h1>
-                    <p id="header-subtitle" class="text-[10px] text-gray-500 font-semibold tracking-wide mt-0.5">PEDIATRIC NUTRITION</p>
+                    <h1 class="text-lg font-bold text-gray-900 leading-none tracking-tight">Wean Diet</h1>
+                    <p id="header-subtitle" class="text-[10px] text-gray-500 font-semibold tracking-wide mt-0.5">Your Complete Weaning Food Guide</p>
                 </div>
             </div>
             <div class="flex gap-2">
@@ -173,21 +183,21 @@
             lang: 'en',
             translations: {
                 en: {
-                    subtitle: "PEDIATRIC NUTRITION",
+                    subtitle: "Your Complete Weaning Food Guide",
                     nav_home: "Home", nav_tracker: "Tracker", nav_diet: "Recipes", nav_guide: "Guide", nav_chat: "Chat", nav_quiz: "Quiz",
-                    welcome_title: "Baby-Led Weaning",
-                    welcome_desc: "An alternative method where infants (6m+) self-feed whole foods instead of spoon-feeding.",
+                    welcome_title: "Start Weaning Today",
+                    welcome_desc: "A step-by-step guide to introduce solids to your baby (6m+) with confidence and care.",
                     quick_tracker: "Log Meal", quick_tracker_desc: "Track solids & milk",
                     quick_chat: "Ask Expert", quick_chat_desc: "Chat with Nurse",
                     pop_recipe: "Popular Recipe", pop_recipe_desc: "Nutritious & easy to make",
                     feedback_card_title: "Research Feedback", feedback_card_desc: "Help our study by rating this app.",
-                    guide_tab1: "Basics", guide_tab2: "Schedule", guide_tab3: "Principles", guide_tab4: "Red Flags",
+                    guide_tab1: "Start", guide_tab2: "Foods", guide_tab3: "Routine", guide_tab4: "Care",
                     red_flag_title: "Foods to Avoid",
                     schedule_6m: "6-8 Months", schedule_9m: "9-11 Months", schedule_1y: "1-2 Years",
                     track_food_label: "Food Item", track_reaction: "Reaction", track_save: "Save Log",
                     chat_placeholder: "Type keyword (e.g., Milk, Avoid)...",
                     qa_title: "Common Questions",
-                    quiz_title: "Quiz", // Updated title
+                    quiz_title: "Quiz", 
                     feedback_title: "Study Feedback", feedback_q1: "Was the app easy to use?", feedback_q2: "Did you feel more confident?",
                     feedback_submit: "Submit Survey", feedback_thanks: "Thank you for participating!",
                     chart_label_solid: "Solid Meals", chart_label_milk: "Milk Feeds",
@@ -196,21 +206,21 @@
                     recipe_title: "Healthy Recipes", recipe_prep: "Prep time", recipe_cook: "Cook time", recipe_ing: "Ingredients", recipe_steps: "Instructions"
                 },
                 ta: {
-                    subtitle: "குழந்தை ஊட்டச்சத்து",
+                    subtitle: "உங்கள் முழுமையான இணை உணவு வழிகாட்டி",
                     nav_home: "முகப்பு", nav_tracker: "பதிவு", nav_diet: "சமையல்", nav_guide: "வழிகாட்டி", nav_chat: "உதவி", nav_quiz: "வினாடி",
-                    welcome_title: "சுய உணவு முறை (BLW)",
-                    welcome_desc: "குழந்தைகள் (6+ மாதம்) தாங்களாகவே கையில் எடுத்து உண்ணும் நவீன முறை.",
+                    welcome_title: "இணை உணவு ஆரம்பம்",
+                    welcome_desc: "6 மாத குழந்தைகளுக்கான முழுமையான உணவு மற்றும் ஊட்டச்சத்து வழிகாட்டி.",
                     quick_tracker: "உணவு பதிவு", quick_tracker_desc: "உணவு விபரம்",
                     quick_chat: "நிபுணரிடம் கேள்", quick_chat_desc: "செவிலியர் உதவி",
                     pop_recipe: "பிரபலமான உணவு", pop_recipe_desc: "சத்தான மற்றும் எளிமையானது",
                     feedback_card_title: "ஆய்வு கருத்துக்கணிப்பு", feedback_card_desc: "உங்கள் கருத்துக்கள் எங்களுக்கு தேவை.",
-                    guide_tab1: "அடிப்படை", guide_tab2: "அட்டவணை", guide_tab3: "விதிமுறைகள்", guide_tab4: "எச்சரிக்கை",
+                    guide_tab1: "துவக்கம்", guide_tab2: "உணவுகள்", guide_tab3: "முறை", guide_tab4: "பராமரிப்பு",
                     red_flag_title: "தவிர்க்க வேண்டியவை",
                     schedule_6m: "6-8 மாதங்கள்", schedule_9m: "9-11 மாதங்கள்", schedule_1y: "1-2 ஆண்டுகள்",
                     track_food_label: "உணவு வகை", track_reaction: "எதிர்வினை", track_save: "சேமிக்கவும்",
                     chat_placeholder: "தேடு (உதாரணம்: பால், தவிர்க்க)...",
                     qa_title: "அடிக்கடி கேட்கப்படும் கேள்விகள்",
-                    quiz_title: "வினாடி வினா", // Updated title
+                    quiz_title: "வினாடி வினா",
                     feedback_title: "கருத்துக்கணிப்பு படிவம்", feedback_q1: "செயலி பயன்படுத்த எளிதாக இருந்ததா?", feedback_q2: "உணவு கொடுப்பதில் நம்பிக்கை உள்ளதா?",
                     feedback_submit: "சமர்ப்பிக்கவும்", feedback_thanks: "பங்கேற்றமைக்கு நன்றி!",
                     chart_label_solid: "திட உணவுகள்", chart_label_milk: "பால்",
@@ -222,33 +232,103 @@
             recipes: [
                 {
                     id: 1,
-                    title_en: "Ragi Porridge", title_ta: "ராகி கூழ்",
-                    desc_en: "Iron-rich first food for babies.", desc_ta: "இரும்புச்சத்து நிறைந்த முதல் உணவு.",
+                    title_en: "Ragi Koozh (Finger Millet Porridge)", title_ta: "ராகி கூழ்",
+                    desc_en: "High Calcium, Iron, and Fiber. Best for 6+ Months (First Food).", desc_ta: "கால்சியம், இரும்புச்சத்து மற்றும் நார்ச்சத்து நிறைந்தது. 6+ மாதங்களுக்கு ஏற்றது (முதல் உணவு).",
                     prep: "5 min", cook: "10 min",
-                    ing_en: ["2 tbsp Sprouted Ragi Flour", "1 cup Water", "1/2 tsp Ghee"],
-                    ing_ta: ["2 மேசைக்கரண்டி ராகி மாவு", "1 கப் தண்ணீர்", "1/2 தேக்கரண்டி நெய்"],
-                    steps_en: ["Mix ragi flour with water without lumps.", "Cook on low flame until it thickens.", "Add ghee and serve warm."],
-                    steps_ta: ["ராகி மாவை தண்ணீரில் கட்டிகள் இல்லாமல் கலக்கவும்.", "குறைந்த தீயில் கெட்டியாகும் வரை சமைக்கவும்.", "நெய் சேர்த்து மிதமான சூட்டில் பரிமாறவும்."]
+                    ing_en: ["2 tbsp Sprouted Ragi Flour", "1 cup Water", "1/2 tsp Ghee", "Jaggery/Cumin (Optional)"],
+                    ing_ta: ["2 மேசைக்கரண்டி முளைக்கட்டிய ராகி மாவு", "1 கப் தண்ணீர்", "1/2 தேக்கரண்டி நெய்", "வெல்லம்/சீரகத்தூள் (விருப்பப்பட்டால்)"],
+                    steps_en: ["Mix ragi flour with a little water to make a smooth paste.", "Boil remaining water. Add paste slowly.", "Cook on low flame until thick (8-10 mins).", "Add ghee. Serve lukewarm."],
+                    steps_ta: ["ராகி மாவை சிறிது தண்ணீரில் கட்டிகள் இல்லாமல் கரைக்கவும்.", "மீதமுள்ள தண்ணீரை கொதிக்க வைத்து அதில் மெதுவாக சேர்க்கவும்.", "மிதமான தீயில் கெட்டியாகும் வரை (8-10 நிமிடம்) காய்ச்சவும்.", "நெய் சேர்த்து மிதமான சூட்டில் பரிமாறவும்."]
                 },
                 {
                     id: 2,
-                    title_en: "Mashed Banana", title_ta: "வாழைப்பழம் மசியல்",
-                    desc_en: "Easy to digest natural sweetness.", desc_ta: "எளிதில் ஜீரணமாகும் இயற்கை இனிப்பு.",
-                    prep: "2 min", cook: "0 min",
-                    ing_en: ["1 Ripe Banana", "Breast milk (optional)"],
-                    ing_ta: ["1 பழுத்த வாழைப்பழம்", "தாய்ப்பால் (தேவைப்பட்டால்)"],
-                    steps_en: ["Peel the banana.", "Mash it well with a fork.", "Add milk for thinner consistency if needed."],
-                    steps_ta: ["வாழைப்பழத்தை உரித்துக்கொள்ளவும்.", "ஸ்பூன் கொண்டு நன்றாக மசிக்கவும்.", "தேவைப்பட்டால் பால் சேர்க்கவும்."]
+                    title_en: "Paruppu Sadam (Lentil Mash)", title_ta: "பருப்பு சாதம்",
+                    desc_en: "High Protein, Carbohydrates, and Energy. Best for 6-8 Months.", desc_ta: "புரதம், கார்போஹைட்ரேட் மற்றும் ஆற்றல் நிறைந்தது. 6-8 மாதங்களுக்கு ஏற்றது.",
+                    prep: "5 min", cook: "15 min",
+                    ing_en: ["2 tbsp Rice", "1 tbsp Moong Dal", "1 pinch Turmeric", "1/2 tsp Ghee", "1.5 cups Water"],
+                    ing_ta: ["2 மேசைக்கரண்டி அரிசி", "1 மேசைக்கரண்டி பாசிப்பருப்பு", "1 சிட்டிகை மஞ்சள் தூள்", "1/2 தேக்கரண்டி நெய்", "1.5 கப் தண்ணீர்"],
+                    steps_en: ["Wash rice and dal.", "Pressure cook with turmeric and water for 4-5 whistles.", "Mash well while hot.", "Drizzle ghee and mix."],
+                    steps_ta: ["அரிசி மற்றும் பருப்பை கழுவவும்.", "மஞ்சள் தூள் மற்றும் தண்ணீர் சேர்த்து குக்கரில் 4-5 விசில் விடவும்.", "சூடாக இருக்கும்போதே நன்றாக மசிக்கவும்.", "நெய் சேர்த்து கலக்கவும்."]
                 },
                 {
                     id: 3,
-                    title_en: "Dal Khichdi", title_ta: "பருப்பு கிச்சடி",
-                    desc_en: "Complete meal with protein & carbs.", desc_ta: "புரதம் மற்றும் கார்போஹைட்ரேட் நிறைந்த உணவு.",
-                    prep: "10 min", cook: "20 min",
-                    ing_en: ["2 tbsp Rice", "1 tbsp Moong Dal", "Pinch of Turmeric", "1 cup Water"],
-                    ing_ta: ["2 மேசைக்கரண்டி அரிசி", "1 மேசைக்கரண்டி பாசிப்பருப்பு", "சிட்டிகை மஞ்சள் தூள்", "1 கப் தண்ணீர்"],
-                    steps_en: ["Wash rice and dal.", "Pressure cook with water and turmeric for 3-4 whistles.", "Mash well and add ghee."],
-                    steps_ta: ["அரிசி மற்றும் பருப்பை கழுவவும்.", "தண்ணீர் மற்றும் மஞ்சள் தூள் சேர்த்து 3-4 விசிலுக்கு வேகவைக்கவும்.", "நன்றாக மசித்து நெய் சேர்க்கவும்."]
+                    title_en: "Idli Mash", title_ta: "இட்லி மசியல்",
+                    desc_en: "Probiotics, easy digestibility. Best for 6-8 Months.", desc_ta: "புரோபயாட்டிக்ஸ் நிறைந்தது, எளிதில் ஜீரணமாகும். 6-8 மாதங்களுக்கு ஏற்றது.",
+                    prep: "15 min", cook: "0 min",
+                    ing_en: ["1 Idli (Steam cooked)", "Warm Water or Breast Milk", "Drop of Ghee (Optional)"],
+                    ing_ta: ["1 இட்லி (ஆவியில் வெந்தது)", "வெதுவெதுப்பான நீர் அல்லது தாய்ப்பால்", "சிறிது நெய் (விருப்பப்பட்டால்)"],
+                    steps_en: ["Steam fresh, soft idlis.", "Crumble one warm idli into a bowl.", "Add warm water or breast milk.", "Mash to a smooth consistency."],
+                    steps_ta: ["இட்லியை ஆவியில் வேகவைக்கவும்.", "இட்லியை கிண்ணத்தில் உதிர்த்து போடவும்.", "வெதுவெதுப்பான நீர்/பால் சேர்க்கவும்.", "கட்டிகள் இல்லாமல் நன்றாக மசிக்கவும்."]
+                },
+                {
+                    id: 4,
+                    title_en: "Apple Suji Kheer (Rava Porridge)", title_ta: "ஆப்பிள் ரவை கஞ்சி",
+                    desc_en: "Vitamin C, Fiber, and Carbohydrates. Best for 7+ Months.", desc_ta: "வைட்டமின் சி, நார்ச்சத்து மற்றும் கார்போஹைட்ரேட். 7+ மாதங்களுக்கு ஏற்றது.",
+                    prep: "5 min", cook: "10 min",
+                    ing_en: ["1 tbsp Roasted Sooji (Rava)", "1/2 Apple (grated/pureed)", "1 cup Water", "1/2 tsp Ghee"],
+                    ing_ta: ["1 மேசைக்கரண்டி வறுத்த ரவை", "1/2 ஆப்பிள் (துருவியது)", "1 கப் தண்ணீர்", "1/2 தேக்கரண்டி நெய்"],
+                    steps_en: ["Roast sooji in ghee until aromatic.", "Add water and cook until soft.", "Add grated apple and cook for 2-3 mins.", "Serve warm."],
+                    steps_ta: ["ரவையை நெய்யில் வாசனை வரும் வரை வறுக்கவும்.", "தண்ணீர் சேர்த்து ரவையை வேகவைக்கவும்.", "துருவிய ஆப்பிள் சேர்த்து 2-3 நிமிடம் வேகவைக்கவும்.", "சூடாக பரிமாறவும்."]
+                },
+                {
+                    id: 5,
+                    title_en: "Carrot-Moong Dal Khichdi", title_ta: "கேரட் பாசிப்பருப்பு கிச்சடி",
+                    desc_en: "Vitamin A (Eyes), Protein, and Fiber. Best for 8+ Months.", desc_ta: "வைட்டமின் ஏ (கண்), புரதம் மற்றும் நார்ச்சத்து. 8+ மாதங்களுக்கு ஏற்றது.",
+                    prep: "10 min", cook: "15 min",
+                    ing_en: ["2 tbsp Rice", "1 tbsp Moong Dal", "1 small Carrot (chopped)", "Turmeric & Cumin powder", "2 cups Water"],
+                    ing_ta: ["2 மேசைக்கரண்டி அரிசி", "1 மேசைக்கரண்டி பாசிப்பருப்பு", "1 சிறிய கேரட் (நறுக்கியது)", "மஞ்சள் & சீரகத்தூள்", "2 கப் தண்ணீர்"],
+                    steps_en: ["Wash rice and dal.", "Pressure cook rice, dal, carrot, turmeric, water (4 whistles).", "Mash everything together.", "Add cumin powder for digestion."],
+                    steps_ta: ["அரிசி மற்றும் பருப்பை கழுவவும்.", "அரிசி, பருப்பு, கேரட், மஞ்சள், தண்ணீர் சேர்த்து 4 விசில் விடவும்.", "அனைத்தையும் ஒன்றாக மசிக்கவும்.", "செரிமானத்திற்கு சீரகத்தூள் சேர்க்கவும்."]
+                },
+                {
+                    id: 6,
+                    title_en: "Curd Rice (Thayir Sadam) - Mash", title_ta: "தயிர் சாதம் மசியல்",
+                    desc_en: "Probiotics (Gut health), Calcium, cooling. Best for 8+ Months.", desc_ta: "புரோபயாட்டிக்ஸ் (குடல் நலம்), கால்சியம், குளிர்ச்சி. 8+ மாதங்களுக்கு ஏற்றது.",
+                    prep: "10 min", cook: "0 min",
+                    ing_en: ["1/2 cup Soft Cooked Rice", "2 tbsp Fresh Homemade Curd", "Coriander leaves (Optional)"],
+                    ing_ta: ["1/2 கப் குழைவான சாதம்", "2 மேசைக்கரண்டி புதிய தயிர்", "கொத்தமல்லி இலைகள் (விருப்பப்பட்டால்)"],
+                    steps_en: ["Mash the cooked rice thoroughly to a paste.", "Mix in the fresh curd.", "Note: No salt for babies under 1 year."],
+                    steps_ta: ["சாதத்தை நன்றாக பேஸ்ட் போல மசிக்கவும்.", "புதிய தயிர் சேர்த்து கலக்கவும்.", "குறிப்பு: 1 வயதுக்கு கீழ் உப்பு சேர்க்க வேண்டாம்."]
+                },
+                {
+                    id: 7,
+                    title_en: "Poha (Aval) Porridge", title_ta: "அவல் கஞ்சி",
+                    desc_en: "Easily digestible Carbohydrates, Iron. Best for 6-8 Months.", desc_ta: "எளிதில் ஜீரணமாகும் கார்போஹைட்ரேட், இரும்புச்சத்து. 6-8 மாதங்களுக்கு ஏற்றது.",
+                    prep: "5 min", cook: "5 min",
+                    ing_en: ["2 tbsp Poha (Flattened Rice)", "Warm Water or Milk", "Jaggery (Optional)", "Ghee"],
+                    ing_ta: ["2 மேசைக்கரண்டி அவல்", "வெதுவெதுப்பான நீர் அல்லது பால்", "வெல்லம் (விருப்பப்பட்டால்)", "நெய்"],
+                    steps_en: ["Dry roast poha and powder it.", "Mix powder with water, cook on low flame (3-4 mins).", "Add a little ghee."],
+                    steps_ta: ["அவலை வறுத்து பொடித்துக் கொள்ளவும்.", "பொடியை தண்ணீரில் கலந்து மிதமான தீயில் (3-4 நிமிடம்) வேகவைக்கவும்.", "சிறிது நெய் சேர்க்கவும்."]
+                },
+                {
+                    id: 8,
+                    title_en: "Mashed Banana & Ghee", title_ta: "வாழைப்பழம் நெய் மசியல்",
+                    desc_en: "Potassium, Energy, Fiber. Good for weight gain. Best for 6+ Months.", desc_ta: "பொட்டாசியம், ஆற்றல், நார்ச்சத்து. எடை கூட உதவும். 6+ மாதங்களுக்கு ஏற்றது.",
+                    prep: "2 min", cook: "0 min",
+                    ing_en: ["1 Small Ripe Banana", "1/2 tsp Ghee"],
+                    ing_ta: ["1 சிறிய பழுத்த வாழைப்பழம்", "1/2 தேக்கரண்டி நெய்"],
+                    steps_en: ["Peel the banana.", "Mash it well with a fork.", "Mix in the ghee."],
+                    steps_ta: ["வாழைப்பழத்தை உரித்துக்கொள்ளவும்.", "ஸ்பூன் கொண்டு நன்றாக மசிக்கவும்.", "நெய் சேர்த்து கலக்கவும்."]
+                },
+                {
+                    id: 9,
+                    title_en: "Rasam Sadam (Pepper Water Rice)", title_ta: "ரசம் சாதம்",
+                    desc_en: "Digestion aid, immunity boosting. Best for 9+ Months.", desc_ta: "செரிமானம், நோய் எதிர்ப்பு சக்தி. 9+ மாதங்களுக்கு ஏற்றது.",
+                    prep: "5 min", cook: "20 min",
+                    ing_en: ["1/2 cup Soft Cooked Rice", "1/2 cup Mild Rasam (No chili)", "1 tsp Ghee"],
+                    ing_ta: ["1/2 கப் குழைவான சாதம்", "1/2 கப் மிதமான ரசம் (மிளகாய் இல்லாமல்)", "1 தேக்கரண்டி நெய்"],
+                    steps_en: ["Take soft cooked rice in a bowl.", "Pour mild rasam over it.", "Mash well so rice absorbs rasam.", "Add ghee."],
+                    steps_ta: ["குழைவான சாதத்தை கிண்ணத்தில் எடுக்கவும்.", "ரசம் ஊற்றவும்.", "சாதம் ரசத்தை உறிஞ்சும் வரை மசிக்கவும்.", "நெய் சேர்க்கவும்."]
+                },
+                {
+                    id: 10,
+                    title_en: "Sathu Maavu Kanji (Health Mix)", title_ta: "சத்துமாவு கஞ்சி",
+                    desc_en: "Balanced meal - Protein, Fats, Minerals. Best for 8+ Months.", desc_ta: "சமச்சீர் உணவு - புரதம், கொழுப்பு, தாதுக்கள். 8+ மாதங்களுக்கு ஏற்றது.",
+                    prep: "5 min", cook: "10 min",
+                    ing_en: ["2 tbsp Sathu Maavu Powder", "1 cup Water", "1/2 tsp Ghee"],
+                    ing_ta: ["2 மேசைக்கரண்டி சத்துமாவு", "1 கப் தண்ணீர்", "1/2 தேக்கரண்டி நெய்"],
+                    steps_en: ["Mix powder with water ensuring no lumps.", "Cook on medium flame until thick.", "Add ghee."],
+                    steps_ta: ["சத்துமாவை தண்ணீரில் கட்டிகள் இல்லாமல் கரைக்கவும்.", "மிதமான தீயில் கெட்டியாகும் வரை காய்ச்சவும்.", "நெய் சேர்க்கவும்."]
                 }
             ],
             chatHistory: [
@@ -419,7 +499,6 @@
         // --- GOOGLE FORM EMBED LOGIC (QUIZ) ---
         function renderQuiz(container) {
             const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfD-T1u-h1lB8fT_vM5mJ-5y4q6r-9m-4z-3/viewform?embedded=true";
-            // Using direct link: https://forms.gle/EJhej4Tfivpa7vM19 
             
             container.innerHTML = `
                 <div class="flex flex-col h-full bg-white">
@@ -660,57 +739,163 @@
             }, 800);
         }
 
-        // --- GUIDE LOGIC ---
+        // --- GUIDE LOGIC (ENHANCED) ---
         function renderGuide(container) {
              container.innerHTML = `
                 <div class="px-5 py-6">
-                    <h2 class="text-2xl font-bold mb-4 text-gray-800 font-heading">Complete Guide</h2>
-                    <div class="flex p-1 bg-gray-200 rounded-xl mb-6">
-                        <button onclick="showGuideSection('basics')" class="guide-tab flex-1 py-2 text-xs font-bold rounded-lg bg-white shadow-sm text-gray-800 transition-all" id="gt-basics">${t('guide_tab1')}</button>
-                        <button onclick="showGuideSection('schedule')" class="guide-tab flex-1 py-2 text-xs font-bold rounded-lg text-gray-500 transition-all" id="gt-schedule">${t('guide_tab2')}</button>
-                        <button onclick="showGuideSection('avoid')" class="guide-tab flex-1 py-2 text-xs font-bold rounded-lg text-gray-500 transition-all" id="gt-avoid">${t('guide_tab4')}</button>
+                    <h2 class="text-2xl font-bold mb-4 text-gray-800 font-heading">Guide</h2>
+                    <div class="flex p-1 bg-gray-200 rounded-xl mb-6 overflow-x-auto">
+                        <button onclick="showGuideSection('basics')" class="guide-tab flex-1 py-2 px-2 text-xs font-bold rounded-lg bg-white shadow-sm text-gray-800 transition-all" id="gt-basics">${t('guide_tab1')}</button>
+                        <button onclick="showGuideSection('foods')" class="guide-tab flex-1 py-2 px-2 text-xs font-bold rounded-lg text-gray-500 transition-all" id="gt-foods">${t('guide_tab2')}</button>
+                        <button onclick="showGuideSection('routine')" class="guide-tab flex-1 py-2 px-2 text-xs font-bold rounded-lg text-gray-500 transition-all" id="gt-routine">${t('guide_tab3')}</button>
+                        <button onclick="showGuideSection('care')" class="guide-tab flex-1 py-2 px-2 text-xs font-bold rounded-lg text-gray-500 transition-all" id="gt-care">${t('guide_tab4')}</button>
                     </div>
+
+                    <!-- TAB 1: START (Basics) -->
                     <div id="gs-basics" class="guide-section space-y-4 animate-[fadeIn_0.3s_ease-out]">
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                            <h3 class="font-bold text-blue-600 mb-2">What is BLW?</h3>
-                            <p class="text-sm text-gray-600 leading-relaxed">${STORE.lang === 'ta' ? 'சுய உணவு முறை (BLW) என்பது குழந்தைகள் 6 மாதத்திலிருந்து திட உணவுகளை தாங்களாகவே எடுத்து உண்ணும் முறையாகும்.' : 'Baby-led weaning (BLW) allows infants to feed themselves finger foods from the start of weaning (6 months).'}</p>
+                        <div class="guide-card">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-2 bg-blue-100 rounded-full text-blue-600"><i data-lucide="baby" class="w-5 h-5"></i></div>
+                                <h3 class="font-bold text-gray-800 text-lg">What is Weaning?</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Weaning (Complementary Feeding) is starting solid foods at 6 months while continuing breastfeeding. It meets the growing baby's needs for energy, iron, and zinc.
+                            </p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                             <h3 class="font-bold text-gray-800 mb-3">Core Principles</h3>
-                            <div class="space-y-3">
-                                <div class="flex gap-3"><div class="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 font-bold text-xs">1</div><div><h4 class="font-bold text-sm">Timely</h4><p class="text-xs text-gray-500">Start at 6 months.</p></div></div>
-                                <div class="flex gap-3"><div class="w-8 h-8 bg-green-50 rounded-full flex items-center justify-center text-green-600 font-bold text-xs">2</div><div><h4 class="font-bold text-sm">Adequate</h4><p class="text-xs text-gray-500">Energy & Protein rich.</p></div></div>
-                                <div class="flex gap-3"><div class="w-8 h-8 bg-red-50 rounded-full flex items-center justify-center text-red-600 font-bold text-xs">3</div><div><h4 class="font-bold text-sm">Safe</h4><p class="text-xs text-gray-500">Hygienic & No choking hazards.</p></div></div>
+                        
+                        <div class="guide-card">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-2 bg-green-100 rounded-full text-green-600"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div>
+                                <h3 class="font-bold text-gray-800 text-lg">Signs of Readiness</h3>
+                            </div>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Head & Neck control (steady head).</li>
+                                <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Sitting with little or no support.</li>
+                                <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Opens mouth when food is offered.</li>
+                                <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Swallows food rather than pushing it out.</li>
+                            </ul>
+                        </div>
+
+                        <div class="guide-card border-l-4 border-l-purple-500">
+                            <h3 class="font-bold text-purple-700 mb-2">Hygiene Rules</h3>
+                            <p class="text-sm text-gray-600 mb-2">1. Wash hands with soap before feeding.</p>
+                            <p class="text-sm text-gray-600 mb-2">2. Use clean cups/spoons. <b>NO BOTTLES.</b></p>
+                            <p class="text-sm text-gray-600">3. Cook fresh food. Use within 1-2 hours.</p>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: FOODS -->
+                    <div id="gs-foods" class="guide-section hidden space-y-4 animate-[fadeIn_0.3s_ease-out]">
+                        <div class="guide-card">
+                            <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i data-lucide="apple" class="w-5 h-5 text-red-500"></i> Best First Foods</h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-orange-50 p-3 rounded-lg text-center"><span class="text-2xl block mb-1">🥣</span><span class="text-xs font-bold text-gray-700">Thick Porridge</span></div>
+                                <div class="bg-yellow-50 p-3 rounded-lg text-center"><span class="text-2xl block mb-1">🥔</span><span class="text-xs font-bold text-gray-700">Mashed Veg</span></div>
+                                <div class="bg-green-50 p-3 rounded-lg text-center"><span class="text-2xl block mb-1">🍌</span><span class="text-xs font-bold text-gray-700">Mashed Fruit</span></div>
+                                <div class="bg-blue-50 p-3 rounded-lg text-center"><span class="text-2xl block mb-1">🥚</span><span class="text-xs font-bold text-gray-700">Egg Yolk</span></div>
+                            </div>
+                        </div>
+
+                        <div class="guide-card">
+                            <h3 class="font-bold text-gray-800 mb-2">⚡ Energy Density</h3>
+                            <p class="text-xs text-gray-500 mb-3">Babies have small stomachs. Food must be rich!</p>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><b>Thicken it:</b> Don't make watery soups. It should stay on the spoon.</li>
+                                <li><b>Add Fat:</b> Mix 1 tsp Ghee, Oil, or Butter in every meal.</li>
+                                <li><b>Add Sweet:</b> Jaggery or mashed fruit (in moderation).</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-red-50 p-5 rounded-2xl border border-red-100">
+                            <h3 class="font-bold text-red-700 flex items-center gap-2 mb-4"><i data-lucide="alert-triangle" class="w-5 h-5"></i> Foods to Avoid (< 1 Year)</h3>
+                             <ul class="space-y-3">
+                                <li class="flex gap-3 items-start bg-white p-3 rounded-lg"><span class="text-xl">🍯</span><div><p class="font-bold text-sm text-gray-800">Honey</p><p class="text-xs text-gray-500">Botulism risk.</p></div></li>
+                                <li class="flex gap-3 items-start bg-white p-3 rounded-lg"><span class="text-xl">🐄</span><div><p class="font-bold text-sm text-gray-800">Cow's Milk</p><p class="text-xs text-gray-500">Not as main drink.</p></div></li>
+                                <li class="flex gap-3 items-start bg-white p-3 rounded-lg"><span class="text-xl">🧂</span><div><p class="font-bold text-sm text-gray-800">Salt & Sugar</p><p class="text-xs text-gray-500">Bad for kidneys.</p></div></li>
+                                <li class="flex gap-3 items-start bg-white p-3 rounded-lg"><span class="text-xl">🍇</span><div><p class="font-bold text-sm text-gray-800">Choking Hazards</p><p class="text-xs text-gray-500">Whole grapes, nuts, popcorn.</p></div></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: ROUTINE (Schedule) -->
+                    <div id="gs-routine" class="guide-section hidden space-y-4 animate-[fadeIn_0.3s_ease-out]">
+                        <div class="relative border-l-2 border-blue-200 ml-4 space-y-8 py-2">
+                            <div class="relative pl-8">
+                                <span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 border-2 border-white"></span>
+                                <h4 class="font-bold text-lg text-blue-800">6 - 8 Months</h4>
+                                <div class="bg-white p-4 rounded-xl mt-2 border border-gray-100 shadow-sm">
+                                    <p class="text-sm font-bold text-gray-700">Frequency:</p>
+                                    <p class="text-sm text-gray-600 mb-2">Breastfeed + 2-3 Meals</p>
+                                    <p class="text-sm font-bold text-gray-700">Texture:</p>
+                                    <p class="text-sm text-gray-600">Thick porridge, well-mashed foods.</p>
+                                </div>
+                            </div>
+                            <div class="relative pl-8">
+                                <span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"></span>
+                                <h4 class="font-bold text-lg text-green-800">9 - 11 Months</h4>
+                                <div class="bg-white p-4 rounded-xl mt-2 border border-gray-100 shadow-sm">
+                                    <p class="text-sm font-bold text-gray-700">Frequency:</p>
+                                    <p class="text-sm text-gray-600 mb-2">Breastfeed + 3 Meals + 1 Snack</p>
+                                    <p class="text-sm font-bold text-gray-700">Texture:</p>
+                                    <p class="text-sm text-gray-600">Finely chopped, lumpy, finger foods.</p>
+                                </div>
+                            </div>
+                            <div class="relative pl-8">
+                                <span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-500 border-2 border-white"></span>
+                                <h4 class="font-bold text-lg text-purple-800">12 - 24 Months</h4>
+                                <div class="bg-white p-4 rounded-xl mt-2 border border-gray-100 shadow-sm">
+                                    <p class="text-sm font-bold text-gray-700">Frequency:</p>
+                                    <p class="text-sm text-gray-600 mb-2">Breastfeed + 3-4 Meals + 2 Snacks</p>
+                                    <p class="text-sm font-bold text-gray-700">Texture:</p>
+                                    <p class="text-sm text-gray-600">Family pot food (mashed/chopped).</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div id="gs-schedule" class="guide-section hidden space-y-4 animate-[fadeIn_0.3s_ease-out]">
-                        <div class="relative border-l-2 border-blue-100 ml-3 space-y-8 py-2">
-                            <div class="relative pl-6"><span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-blue-500 border-2 border-white"></span><h4 class="font-bold text-gray-800">${t('schedule_6m')}</h4><div class="bg-white p-4 rounded-xl mt-2 border border-gray-100 shadow-sm"><p class="text-sm">Thick porridge / Mashed foods.</p><p class="text-xs text-gray-500 mt-1">2-3 meals/day</p></div></div>
-                            <div class="relative pl-6"><span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-green-500 border-2 border-white"></span><h4 class="font-bold text-gray-800">${t('schedule_9m')}</h4><div class="bg-white p-4 rounded-xl mt-2 border border-gray-100 shadow-sm"><p class="text-sm">Finely chopped / Bite-sized.</p><p class="text-xs text-gray-500 mt-1">3 meals + 1 snack</p></div></div>
+
+                    <!-- TAB 4: CARE (Special Situations) -->
+                    <div id="gs-care" class="guide-section hidden space-y-4 animate-[fadeIn_0.3s_ease-out]">
+                        <div class="guide-card border-l-4 border-l-pink-400">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2"><i data-lucide="heart-handshake" class="w-5 h-5 text-pink-500"></i> Responsive Feeding</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed mb-2">
+                                Feeding is not just about food, it's about love.
+                            </p>
+                            <ul class="list-disc pl-4 text-sm text-gray-600 space-y-1">
+                                <li>Feed slowly and patiently.</li>
+                                <li>Encourage, but <b>never force</b>.</li>
+                                <li>Maintain eye contact and talk to baby.</li>
+                                <li>If baby refuses, try again later.</li>
+                            </ul>
                         </div>
-                    </div>
-                    <div id="gs-avoid" class="guide-section hidden space-y-4 animate-[fadeIn_0.3s_ease-out]">
-                        <div class="bg-red-50 p-5 rounded-2xl border border-red-100">
-                            <h3 class="font-bold text-red-700 flex items-center gap-2 mb-4"><i data-lucide="alert-octagon" class="w-5 h-5"></i> ${t('red_flag_title')}</h3>
-                             <ul class="space-y-3">
-                                <li class="flex gap-3 items-start bg-white p-3 rounded-lg"><span class="text-xl">🍯</span><div><p class="font-bold text-sm text-gray-800">Honey / தேன்</p><p class="text-xs text-gray-500">Risk of Botulism.</p></div></li>
-                                <li class="flex gap-3 items-start bg-white p-3 rounded-lg"><span class="text-xl">🍪</span><div><p class="font-bold text-sm text-gray-800">Biscuits / பிஸ்கட்</p><p class="text-xs text-gray-500">High sugar & preservatives.</p></div></li>
-                                <li class="flex gap-3 items-start bg-white p-3 rounded-lg"><span class="text-xl">🍇</span><div><p class="font-bold text-sm text-gray-800">Whole Grapes / திராட்சை</p><p class="text-xs text-gray-500">Choking hazard.</p></div></li>
+
+                        <div class="guide-card bg-red-50 border-red-100">
+                            <h3 class="font-bold text-red-800 mb-2 flex items-center gap-2"><i data-lucide="thermometer" class="w-5 h-5 text-red-600"></i> During Illness</h3>
+                            <p class="text-sm text-gray-700 mb-2"><b>Never stop feeding.</b></p>
+                            <ul class="text-sm text-gray-600 space-y-2">
+                                <li>Breastfeed more frequently.</li>
+                                <li>Offer soft, favorite foods in small amounts.</li>
+                                <li><b>Recovery:</b> Give one extra meal daily for 1 week after illness for catch-up growth.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             `;
+            
+            // Re-initialize icons for the new HTML
+            lucide.createIcons();
+
             window.showGuideSection = function(id) {
                 document.querySelectorAll('.guide-section').forEach(el => el.classList.add('hidden'));
                 document.getElementById('gs-' + id).classList.remove('hidden');
+                
                 document.querySelectorAll('.guide-tab').forEach(el => {
                     el.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
                     el.classList.add('text-gray-500');
                 });
-                document.getElementById('gt-' + id).classList.add('bg-white', 'shadow-sm', 'text-gray-800');
-                document.getElementById('gt-' + id).classList.remove('text-gray-500');
+                
+                const activeBtn = document.getElementById('gt-' + id);
+                activeBtn.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+                activeBtn.classList.remove('text-gray-500');
             }
         }
 
