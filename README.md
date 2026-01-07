@@ -3,13 +3,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>WeanWise - Modern Weaning Guide</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -25,7 +22,7 @@
                             50: '#eef2ff',
                             100: '#e0e7ff',
                             500: '#6366f1',
-                            600: '#4f46e5', // Indigo 600
+                            600: '#4f46e5',
                             700: '#4338ca',
                         },
                         surface: '#f8fafc',
@@ -37,7 +34,7 @@
 
     <style>
         body {
-            background-color: #f1f5f9; /* Slate 100 */
+            background-color: #f1f5f9;
             -webkit-tap-highlight-color: transparent;
         }
         body.lang-ta {
@@ -84,7 +81,7 @@
             background-color: #eef2ff;
         }
         .nav-item-inactive {
-            color: #64748b; /* Slate 500 */
+            color: #64748b;
         }
         
         /* Custom Tab Switcher */
@@ -96,13 +93,19 @@
             color: #4f46e5;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
+
+        /* DYNAMIC LAYOUT STYLES */
+        #main-content {
+            /* This variable is set by JS */
+            padding-bottom: var(--nav-height, 96px);
+        }
     </style>
 </head>
 <body class="h-screen w-full flex items-center justify-center text-slate-800">
 
     <div class="w-full h-full sm:max-w-[420px] sm:h-[92vh] bg-surface sm:rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col relative sm:border-[8px] sm:border-slate-900">
         
-        <header class="bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 py-5 z-20 flex justify-between items-center shrink-0">
+        <header class="bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 py-5 z-20 flex justify-between items-center shrink-0 absolute top-0 w-full">
             <div class="flex items-center gap-3" onclick="switchTab('home')">
                 <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary-500/30 cursor-pointer">
                     <i data-lucide="utensils-crossed" class="w-5 h-5"></i>
@@ -117,10 +120,10 @@
             </button>
         </header>
 
-        <main id="main-content" class="flex-1 overflow-y-auto hide-scrollbar bg-slate-50 relative w-full">
-            </main>
+        <main id="main-content" class="flex-1 overflow-y-auto hide-scrollbar bg-slate-50 relative w-full pt-24">
+        </main>
 
-        <nav class="bg-white border-t border-slate-100 px-4 py-3 shrink-0 z-30 pb-safe">
+        <nav id="bottom-nav" class="bg-white border-t border-slate-100 px-4 py-3 shrink-0 z-40 absolute bottom-0 w-full pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
             <div class="flex justify-between items-center">
                 <button onclick="switchTab('home')" class="nav-btn flex flex-col items-center justify-center w-14 h-14 rounded-2xl transition-all" data-tab="home">
                     <i data-lucide="layout-grid" class="w-6 h-6 mb-1"></i>
@@ -157,6 +160,29 @@
     </div>
 
     <script>
+        // --- DYNAMIC LAYOUT CALCULATION ---
+        function adjustLayout() {
+            const nav = document.getElementById('bottom-nav');
+            const main = document.getElementById('main-content');
+            
+            if (nav && main) {
+                // Measure the actual height of the nav including padding/borders
+                const navHeight = nav.offsetHeight;
+                
+                // Add a little buffer (e.g., 20px) for visual spacing
+                const spacing = 20;
+                
+                // Set the CSS variable on the main content
+                main.style.setProperty('--nav-height', `${navHeight + spacing}px`);
+                console.log(`Layout adjusted: Nav is ${navHeight}px`);
+            }
+        }
+
+        // Trigger on load and resize
+        window.addEventListener('resize', adjustLayout);
+        document.addEventListener('DOMContentLoaded', adjustLayout);
+
+
         // --- DATA STORE (UNCHANGED) ---
         const STORE = {
             lang: 'en',
@@ -412,7 +438,7 @@
             
             // Main Content Container
             const main = document.getElementById('main-content');
-            main.className = "flex-1 overflow-y-auto hide-scrollbar bg-slate-50/50 relative w-full animate-fade-in";
+            main.className = "flex-1 overflow-y-auto hide-scrollbar bg-slate-50 relative w-full pt-24 animate-fade-in";
             main.scrollTop = 0;
 
             // Route Logic
@@ -425,12 +451,15 @@
             else if (tabId === 'feedback') renderFeedback(main);
             
             lucide.createIcons();
+            
+            // Recalculate layout after tab switch
+            requestAnimationFrame(adjustLayout);
         }
 
         // --- RENDERERS (MODERN UI) ---
         function renderHome(container) {
             container.innerHTML = `
-                <div class="px-6 py-6 space-y-6 pb-24">
+                <div class="px-6 py-6 space-y-6">
                     <div class="bg-gradient-to-br from-primary-600 to-indigo-800 rounded-[2rem] p-8 text-white shadow-xl shadow-primary-900/20 relative overflow-hidden group cursor-pointer" onclick="switchTab('guide')">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl transform translate-x-10 -translate-y-10"></div>
                         <div class="absolute bottom-0 left-0 w-24 h-24 bg-primary-400/20 rounded-full blur-xl transform -translate-x-5 translate-y-5"></div>
@@ -486,7 +515,7 @@
         function renderTracker(container) {
             const options = t('food_options').map(f => `<option>${f}</option>`).join('');
             container.innerHTML = `
-                <div class="px-6 py-6 pb-24">
+                <div class="px-6 py-6">
                     <h2 class="text-2xl font-extrabold mb-6 text-slate-800 tracking-tight">Feeding Tracker</h2>
                     
                     <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 h-72 relative mb-6">
@@ -622,7 +651,7 @@
         // --- GUIDE LOGIC ---
         function renderGuide(container) {
              container.innerHTML = `
-                <div class="px-6 py-6 pb-24">
+                <div class="px-6 py-6">
                     <h2 class="text-2xl font-extrabold mb-6 text-slate-800 tracking-tight">Parent Guide</h2>
                     
                     <div class="flex p-1.5 bg-slate-200/60 rounded-2xl mb-8 overflow-x-auto relative">
@@ -799,7 +828,7 @@
         // --- DIET / RECIPE LOGIC ---
         function renderDiet(container) {
             container.innerHTML = `
-                <div class="px-6 py-6 pb-24">
+                <div class="px-6 py-6">
                     <h2 class="text-2xl font-extrabold mb-6 text-slate-800 tracking-tight">${t('recipe_title')}</h2>
                     <div class="grid gap-4">
                         ${STORE.recipes.map((r, i) => `
@@ -909,7 +938,7 @@
                         </div>
                     </div>
 
-                    <div class="flex-1 overflow-y-auto p-6 space-y-6 pb-24" id="chat-scroller">
+                    <div class="flex-1 overflow-y-auto p-6 space-y-6" id="chat-scroller">
                         ${STORE.chatHistory.map(msg => `
                             <div class="flex w-full ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in">
                                 <div class="max-w-[85%] px-5 py-3.5 rounded-2xl text-sm font-medium leading-relaxed shadow-sm ${msg.sender === 'user' ? 'bg-primary-600 text-white rounded-tr-sm' : 'bg-white text-slate-700 border border-slate-100 rounded-tl-sm'}">
@@ -919,7 +948,7 @@
                         `).join('')}
                     </div>
                     
-                    <div class="p-4 bg-white border-t border-slate-100 pb-safe">
+                    <div class="p-4 bg-white border-t border-slate-100 pb-safe z-30 relative">
                         <div class="flex gap-3 bg-slate-100 p-1.5 rounded-[2rem]">
                             <input type="text" id="chat-input" placeholder="${t('chat_placeholder')}" class="flex-1 bg-transparent border-none px-4 py-3 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:ring-0 outline-none" onkeypress="handleEnter(event)">
                             <button onclick="sendUserMsg()" class="w-11 h-11 bg-primary-600 rounded-full flex items-center justify-center text-white shadow-md hover:bg-primary-700 transition-colors active:scale-95"><i data-lucide="send" class="w-5 h-5 ml-0.5"></i></button>
