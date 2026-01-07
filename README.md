@@ -1,12 +1,16 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WeanWise - Modern Weaning Guide</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>WeanWise - App</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -18,13 +22,7 @@
                         tamil: ['"Mukta Malar"', 'sans-serif'],
                     },
                     colors: {
-                        primary: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                        },
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' },
                         surface: '#f8fafc',
                     }
                 }
@@ -33,79 +31,47 @@
     </script>
 
     <style>
-        body {
+        /* CRITICAL FIX: Lock the body to viewport height and prevent rubber-banding */
+        html, body {
+            height: 100dvh; /* Dynamic Viewport Height */
+            width: 100vw;
+            overflow: hidden; /* Stop body scroll */
+            overscroll-behavior: none; /* Stop bounce */
             background-color: #f1f5f9;
             -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y;
         }
-        body.lang-ta {
-            font-family: 'Mukta Malar', sans-serif;
+
+        /* Scrollable Area Styling */
+        .scroll-area {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+            overscroll-behavior: contain; /* Traps scroll inside element */
         }
         
-        /* Hide Scrollbar but allow scroll */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        /* Animations & Visuals */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .card-hover { transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .card-hover:active { transform: scale(0.97); }
+        .nav-item-active { color: #4f46e5; background-color: #eef2ff; }
+        .nav-item-inactive { color: #64748b; }
+        .tab-pill { transition: all 0.3s ease; }
+        .tab-pill.active { background-color: white; color: #4f46e5; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        /* Modern Card */
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .card-hover:active {
-            transform: scale(0.97);
-        }
-
-        /* Nav Item Active State */
-        .nav-item-active {
-            color: #4f46e5;
-            background-color: #eef2ff;
-        }
-        .nav-item-inactive {
-            color: #64748b;
-        }
-        
-        /* Custom Tab Switcher */
-        .tab-pill {
-            transition: all 0.3s ease;
-        }
-        .tab-pill.active {
-            background-color: white;
-            color: #4f46e5;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        /* DYNAMIC LAYOUT STYLES */
-        #main-content {
-            /* This variable is set by JS */
-            padding-bottom: var(--nav-height, 96px);
-        }
+        /* Safe Area for iPhone X+ */
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        .pt-safe { padding-top: env(safe-area-inset-top, 20px); }
     </style>
 </head>
-<body class="h-screen w-full flex items-center justify-center text-slate-800">
+<body class="flex items-center justify-center bg-slate-200">
 
-    <div class="w-full h-full sm:max-w-[420px] sm:h-[92vh] bg-surface sm:rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col relative sm:border-[8px] sm:border-slate-900">
+    <div class="w-full h-full sm:max-w-[420px] sm:h-[95dvh] bg-surface sm:rounded-[2.5rem] shadow-2xl flex flex-col relative overflow-hidden sm:border-[8px] sm:border-slate-900">
         
-        <header class="bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 py-5 z-20 flex justify-between items-center shrink-0 absolute top-0 w-full">
+        <header class="bg-white/95 backdrop-blur-md border-b border-slate-100 px-6 py-4 z-20 flex justify-between items-center shrink-0 pt-safe">
             <div class="flex items-center gap-3" onclick="switchTab('home')">
                 <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary-500/30 cursor-pointer">
                     <i data-lucide="utensils-crossed" class="w-5 h-5"></i>
@@ -120,70 +86,50 @@
             </button>
         </header>
 
-        <main id="main-content" class="flex-1 overflow-y-auto hide-scrollbar bg-slate-50 relative w-full pt-24">
-        </main>
+        <main id="main-content" class="flex-1 scroll-area hide-scrollbar bg-slate-50/50 relative w-full pb-6">
+            </main>
 
-        <nav id="bottom-nav" class="bg-white border-t border-slate-100 px-4 py-3 shrink-0 z-40 absolute bottom-0 w-full pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
-            <div class="flex justify-between items-center">
-                <button onclick="switchTab('home')" class="nav-btn flex flex-col items-center justify-center w-14 h-14 rounded-2xl transition-all" data-tab="home">
-                    <i data-lucide="layout-grid" class="w-6 h-6 mb-1"></i>
+        <nav class="bg-white border-t border-slate-100 px-4 py-2 shrink-0 z-30 pb-safe shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] relative">
+            <div class="flex justify-between items-end h-14">
+                <button onclick="switchTab('home')" class="nav-btn flex flex-col items-center justify-center w-14 h-12 rounded-xl transition-all" data-tab="home">
+                    <i data-lucide="layout-grid" class="w-6 h-6 mb-0.5"></i>
                 </button>
-                <button onclick="switchTab('guide')" class="nav-btn flex flex-col items-center justify-center w-14 h-14 rounded-2xl transition-all" data-tab="guide">
-                    <i data-lucide="book-open" class="w-6 h-6 mb-1"></i>
+                <button onclick="switchTab('guide')" class="nav-btn flex flex-col items-center justify-center w-14 h-12 rounded-xl transition-all" data-tab="guide">
+                    <i data-lucide="book-open" class="w-6 h-6 mb-0.5"></i>
                 </button>
-                <button onclick="switchTab('diet')" class="nav-btn -mt-8 bg-primary-600 text-white shadow-xl shadow-primary-600/40 w-14 h-14 rounded-full flex items-center justify-center transition-transform active:scale-95" data-tab="diet">
-                    <i data-lucide="chef-hat" class="w-6 h-6"></i>
+                
+                <div class="relative -top-5">
+                    <button onclick="switchTab('diet')" class="nav-btn bg-primary-600 text-white shadow-xl shadow-primary-600/40 w-14 h-14 rounded-full flex items-center justify-center transition-transform active:scale-95 border-4 border-white" data-tab="diet">
+                        <i data-lucide="chef-hat" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <button onclick="switchTab('tracker')" class="nav-btn flex flex-col items-center justify-center w-14 h-12 rounded-xl transition-all" data-tab="tracker">
+                    <i data-lucide="activity" class="w-6 h-6 mb-0.5"></i>
                 </button>
-                <button onclick="switchTab('tracker')" class="nav-btn flex flex-col items-center justify-center w-14 h-14 rounded-2xl transition-all" data-tab="tracker">
-                    <i data-lucide="activity" class="w-6 h-6 mb-1"></i>
-                </button>
-                <button onclick="switchTab('quiz')" class="nav-btn flex flex-col items-center justify-center w-14 h-14 rounded-2xl transition-all" data-tab="quiz">
-                    <i data-lucide="clipboard-check" class="w-6 h-6 mb-1"></i>
+                <button onclick="switchTab('quiz')" class="nav-btn flex flex-col items-center justify-center w-14 h-12 rounded-xl transition-all" data-tab="quiz">
+                    <i data-lucide="clipboard-check" class="w-6 h-6 mb-0.5"></i>
                 </button>
             </div>
         </nav>
 
         <div id="modal-overlay" class="absolute inset-0 z-50 hidden">
             <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0" id="modal-backdrop" onclick="closeModal()"></div>
-            
             <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[2.5rem] h-[90%] transform translate-y-full transition-transform duration-300 ease-out flex flex-col shadow-2xl" id="modal-panel">
-                <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+                <div class="p-6 border-b border-slate-100 flex justify-between items-center shrink-0">
                     <h3 id="modal-title" class="font-bold text-xl text-slate-800 line-clamp-1">Details</h3>
                     <button onclick="closeModal()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors">
                         <i data-lucide="x" class="w-4 h-4 text-slate-600"></i>
                     </button>
                 </div>
-                <div id="modal-body" class="flex-1 overflow-y-auto p-6 space-y-6"></div>
+                <div id="modal-body" class="flex-1 overflow-y-auto p-6 space-y-6 scroll-area"></div>
             </div>
         </div>
 
     </div>
 
     <script>
-        // --- DYNAMIC LAYOUT CALCULATION ---
-        function adjustLayout() {
-            const nav = document.getElementById('bottom-nav');
-            const main = document.getElementById('main-content');
-            
-            if (nav && main) {
-                // Measure the actual height of the nav including padding/borders
-                const navHeight = nav.offsetHeight;
-                
-                // Add a little buffer (e.g., 20px) for visual spacing
-                const spacing = 20;
-                
-                // Set the CSS variable on the main content
-                main.style.setProperty('--nav-height', `${navHeight + spacing}px`);
-                console.log(`Layout adjusted: Nav is ${navHeight}px`);
-            }
-        }
-
-        // Trigger on load and resize
-        window.addEventListener('resize', adjustLayout);
-        document.addEventListener('DOMContentLoaded', adjustLayout);
-
-
-        // --- DATA STORE (UNCHANGED) ---
+        // --- DATA STORE ---
         const STORE = {
             lang: 'en',
             translations: {
@@ -391,7 +337,6 @@
 
         function toggleLanguage() {
             STORE.lang = STORE.lang === 'en' ? 'ta' : 'en';
-            document.body.classList.toggle('lang-ta', STORE.lang === 'ta');
             
             // Update button UI
             const btn = document.getElementById('lang-btn');
@@ -411,7 +356,7 @@
         }
 
         function switchTab(tabId) {
-            // Update Nav UI with SaaS Style
+            // Update Nav UI
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 // Diet button is special
                 if (btn.dataset.tab === 'diet') return; 
@@ -425,7 +370,7 @@
                 }
             });
 
-            // Update Diet Button State separately if needed
+            // Update Diet Button State
             const dietBtn = document.querySelector('[data-tab="diet"]');
             if (tabId === 'diet') {
                 dietBtn.classList.add('scale-110');
@@ -438,7 +383,7 @@
             
             // Main Content Container
             const main = document.getElementById('main-content');
-            main.className = "flex-1 overflow-y-auto hide-scrollbar bg-slate-50 relative w-full pt-24 animate-fade-in";
+            main.className = "flex-1 scroll-area hide-scrollbar bg-slate-50/50 relative w-full pb-6 animate-fade-in";
             main.scrollTop = 0;
 
             // Route Logic
@@ -451,12 +396,9 @@
             else if (tabId === 'feedback') renderFeedback(main);
             
             lucide.createIcons();
-            
-            // Recalculate layout after tab switch
-            requestAnimationFrame(adjustLayout);
         }
 
-        // --- RENDERERS (MODERN UI) ---
+        // --- RENDERERS ---
         function renderHome(container) {
             container.innerHTML = `
                 <div class="px-6 py-6 space-y-6">
@@ -564,7 +506,7 @@
             setTimeout(renderChart, 100);
         }
 
-        // --- CHART LOGIC (UNCHANGED) ---
+        // --- CHART LOGIC ---
         function renderChart() {
             const ctx = document.getElementById('trackerChart');
             if(!ctx) return;
@@ -932,13 +874,13 @@
                         </div>
                     </div>
                     
-                    <div class="bg-white py-3 px-6 border-b border-slate-100 overflow-x-auto whitespace-nowrap hide-scrollbar">
+                    <div class="bg-white py-3 px-6 border-b border-slate-100 overflow-x-auto whitespace-nowrap hide-scrollbar shrink-0">
                         <div class="flex gap-2">
                            ${categories.map(c => `<button onclick="filterChatCategory('${c}')" class="category-chip px-5 py-2 bg-slate-50 border border-slate-200 rounded-full text-xs font-bold text-slate-600 hover:bg-primary-50 hover:text-primary-600 hover:border-primary-100 transition-all active:scale-95">${c}</button>`).join('')}
                         </div>
                     </div>
 
-                    <div class="flex-1 overflow-y-auto p-6 space-y-6" id="chat-scroller">
+                    <div class="flex-1 overflow-y-auto p-6 space-y-6 scroll-area" id="chat-scroller">
                         ${STORE.chatHistory.map(msg => `
                             <div class="flex w-full ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in">
                                 <div class="max-w-[85%] px-5 py-3.5 rounded-2xl text-sm font-medium leading-relaxed shadow-sm ${msg.sender === 'user' ? 'bg-primary-600 text-white rounded-tr-sm' : 'bg-white text-slate-700 border border-slate-100 rounded-tl-sm'}">
@@ -948,7 +890,7 @@
                         `).join('')}
                     </div>
                     
-                    <div class="p-4 bg-white border-t border-slate-100 pb-safe z-30 relative">
+                    <div class="p-4 bg-white border-t border-slate-100 shrink-0 pb-6">
                         <div class="flex gap-3 bg-slate-100 p-1.5 rounded-[2rem]">
                             <input type="text" id="chat-input" placeholder="${t('chat_placeholder')}" class="flex-1 bg-transparent border-none px-4 py-3 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:ring-0 outline-none" onkeypress="handleEnter(event)">
                             <button onclick="sendUserMsg()" class="w-11 h-11 bg-primary-600 rounded-full flex items-center justify-center text-white shadow-md hover:bg-primary-700 transition-colors active:scale-95"><i data-lucide="send" class="w-5 h-5 ml-0.5"></i></button>
@@ -1025,11 +967,11 @@
         function renderQuiz(container) {
              container.innerHTML = `
                 <div class="flex flex-col h-full bg-white">
-                    <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-white z-10 sticky top-0">
+                    <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-white z-10 sticky top-0 shrink-0">
                         <h2 class="text-xl font-bold text-slate-800">${t('quiz_title')}</h2>
                         <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full uppercase tracking-widest">Google Form</span>
                     </div>
-                    <div class="flex-1 relative w-full bg-slate-50">
+                    <div class="flex-1 relative w-full bg-slate-50 scroll-area">
                         <iframe src="https://forms.gle/EJhej4Tfivpa7vM19" class="absolute inset-0 w-full h-full border-0" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
                     </div>
                 </div>
@@ -1039,11 +981,11 @@
         function renderFeedback(container) {
              container.innerHTML = `
                 <div class="flex flex-col h-full bg-white">
-                    <div class="px-6 py-4 border-b border-slate-100 flex items-center gap-4 bg-white z-10 sticky top-0">
+                    <div class="px-6 py-4 border-b border-slate-100 flex items-center gap-4 bg-white z-10 sticky top-0 shrink-0">
                         <button onclick="switchTab('home')" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200"><i data-lucide="arrow-left" class="w-5 h-5 text-slate-600"></i></button>
                         <h2 class="text-xl font-bold text-slate-800">${t('feedback_title')}</h2>
                     </div>
-                    <div class="flex-1 relative w-full bg-slate-50">
+                    <div class="flex-1 relative w-full bg-slate-50 scroll-area">
                         <iframe src="https://forms.gle/dL4b5tVfx6A7T6vj9" class="absolute inset-0 w-full h-full border-0" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
                     </div>
                 </div>
